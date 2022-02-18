@@ -3,7 +3,7 @@
 	"packageManager": "yarn@3.1.1",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"license": "MIT",
 	"keywords": [
 		"firebase",
@@ -24,7 +24,8 @@
 	"scripts": {
 		"build": "tsup src/index.ts --dts",
 		"test": "yarn jest",
-		"fullbuild": "yarn build && yarn test"
+		"fullbuild": "yarn build && yarn test",
+		"release": "yarn fullbuild && yarn npm publish"
 	},
 	"devDependencies": {
 		"@sucrase/jest-plugin": "^2.2.0",

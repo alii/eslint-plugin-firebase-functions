@@ -7,8 +7,9 @@ export const safeFunctionExports = makeRule(
 		const hasFirebaseImports = context.getSourceCode().ast.body.some(node => {
 			if (node.type === 'ImportDeclaration') {
 				const namespaces = node.specifiers.filter(
-					specifier => specifier.type === 'ImportNamespaceSpecifier',
-				) as ImportNamespaceSpecifier[];
+					(specifier): specifier is ImportNamespaceSpecifier =>
+						specifier.type === 'ImportNamespaceSpecifier',
+				);
 
 				if (namespaces.length === 0) {
 					// No `import * as functions from 'firebase-functions'`, so this is not a "valid" firebase import and we can
