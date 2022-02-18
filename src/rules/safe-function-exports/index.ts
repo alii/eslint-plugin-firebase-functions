@@ -57,7 +57,7 @@ export const safeFunctionExports = makeRule(
 				if (!isExported) {
 					context.report({
 						node,
-						message: INVALID_FUNCTION_EXPORT,
+						messageId: 'INVALID_FUNCTION_EXPORT',
 						fix(fixer) {
 							return [fixer.insertTextBefore(node, 'export ')];
 						},
@@ -68,5 +68,6 @@ export const safeFunctionExports = makeRule(
 	},
 	{
 		fixable: 'code',
+		messages: {INVALID_FUNCTION_EXPORT},
 	},
 );
