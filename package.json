@@ -5,6 +5,16 @@
 	"types": "./dist/index.d.ts",
 	"version": "1.0.0",
 	"license": "MIT",
+	"keywords": [
+		"firebase",
+		"eslint",
+		"eslintplugin",
+		"firebase-functions"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/alii/eslint-plugin-firebase-functions"
+	},
 	"files": [
 		"dist/**",
 		"LICENSE",
@@ -13,7 +23,8 @@
 	],
 	"scripts": {
 		"build": "tsup src/index.ts --dts",
-		"test": "yarn jest"
+		"test": "yarn jest",
+		"fullbuild": "yarn build && yarn test"
 	},
 	"devDependencies": {
 		"@sucrase/jest-plugin": "^2.2.0",
