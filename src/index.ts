@@ -1,9 +1,7 @@
-import {create as safeFunctionExports} from './rules/safe-function-exports';
+import {safeFunctionExports} from './rules/safe-function-exports';
 
-const config = {
+export default {
 	rules: {
-		'safe-function-exports': {create: safeFunctionExports},
+		'safe-function-exports': safeFunctionExports,
 	},
 };
-
-export default config;
