@@ -24,7 +24,8 @@ module.exports = {
 
 <details>
 <summary>
-`safe-function-exports`: Ensures that firebase functions defined in a file are exported inline as a named export
+<code>safe-function-exports</code> —
+Ensures that firebase functions defined in a file are exported inline as a named export
 </summary>
 
 ```ts
