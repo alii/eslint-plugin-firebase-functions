@@ -79,5 +79,11 @@ export const safeFunctionExports: Rule.RuleModule = {
 	meta: {
 		fixable: 'code',
 		messages: {INVALID_FUNCTION_EXPORT},
+		docs: {
+			description: 'Ensures that all firebase functions are exported in a file',
+			recommended: true,
+			category: 'Possible Problems',
+		},
+		type: 'problem',
 	},
 };
