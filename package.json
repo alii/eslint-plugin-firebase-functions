@@ -1,6 +1,6 @@
 {
 	"name": "eslint-plugin-firebase-functions",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
@@ -23,7 +23,7 @@
 		"package.json"
 	],
 	"scripts": {
-		"build": "tsup src/index.ts --format cjs,esm --dts --no-splitting",
+		"build": "tsup src/index.ts --format cjs,esm --dts",
 		"test": "yarn jest",
 		"fullbuild": "yarn build && yarn test",
 		"release": "yarn fullbuild && yarn npm publish"
