@@ -1,5 +1,6 @@
 import {Rule} from 'eslint';
 import {ImportNamespaceSpecifier} from 'estree';
+import {getRootName} from '../../util/props';
 import {INVALID_FUNCTION_EXPORT} from './errors';
 
 export interface SafeFunctionExportsOptions {
@@ -43,14 +44,17 @@ export const safeFunctionExports: Rule.RuleModule = {
 				const isFirebaseFunction =
 					node.kind === 'const' &&
 					node.declarations.every(declaration => {
-						return (
+						if (
 							declaration.init &&
 							declaration.init.type === 'CallExpression' &&
 							declaration.init.callee.type === 'MemberExpression' &&
-							declaration.init.callee.object.type === 'MemberExpression' &&
-							declaration.init.callee.object.object.type === 'Identifier' &&
-							declaration.init.callee.object.object.name === importStarName
-						);
+							declaration.init.callee.object
+						) {
+							const rootName = getRootName(declaration.init.callee.object);
+							return rootName === importStarName;
+						}
+
+						return false;
 					});
 
 				if (!isFirebaseFunction) {
