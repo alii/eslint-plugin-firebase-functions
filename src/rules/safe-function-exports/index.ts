@@ -1,9 +1,9 @@
+import {Rule} from 'eslint';
 import {ImportNamespaceSpecifier} from 'estree';
-import {makeRule} from '../../util/make-rule';
 import {INVALID_FUNCTION_EXPORT} from './errors';
 
-export const safeFunctionExports = makeRule(
-	context => {
+export const safeFunctionExports: Rule.RuleModule = {
+	create: context => {
 		const hasFirebaseImports = context.getSourceCode().ast.body.some(node => {
 			if (node.type === 'ImportDeclaration') {
 				const namespaces = node.specifiers.filter(
@@ -43,8 +43,7 @@ export const safeFunctionExports = makeRule(
 							declaration.init.callee.object.type === 'MemberExpression' &&
 							declaration.init.callee.object.object.type === 'Identifier' &&
 							declaration.init.callee.object.object.name === 'functions' &&
-							declaration.init.callee.object.property.type === 'Identifier' &&
-							declaration.init.callee.object.property.name === 'https'
+							declaration.init.callee.object.property.type === 'Identifier'
 						);
 					});
 
@@ -66,8 +65,9 @@ export const safeFunctionExports = makeRule(
 			},
 		};
 	},
-	{
+
+	meta: {
 		fixable: 'code',
 		messages: {INVALID_FUNCTION_EXPORT},
 	},
-);
+};
