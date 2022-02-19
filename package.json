@@ -23,7 +23,7 @@
 		"package.json"
 	],
 	"scripts": {
-		"build": "tsup src/index.ts --format cjs,esm --dts",
+		"build": "tsup src/index.ts --format cjs,esm --dts --no-splitting",
 		"test": "yarn jest",
 		"fullbuild": "yarn build && yarn test",
 		"release": "yarn fullbuild && yarn npm publish"
