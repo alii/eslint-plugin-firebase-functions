@@ -2,8 +2,9 @@
 	"name": "eslint-plugin-firebase-functions",
 	"packageManager": "yarn@3.1.1",
 	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"license": "MIT",
 	"keywords": [
 		"firebase",
@@ -22,7 +23,7 @@
 		"package.json"
 	],
 	"scripts": {
-		"build": "tsup src/index.ts --dts",
+		"build": "tsup src/index.ts --format cjs,esm --dts",
 		"test": "yarn jest",
 		"fullbuild": "yarn build && yarn test",
 		"release": "yarn fullbuild && yarn npm publish"
