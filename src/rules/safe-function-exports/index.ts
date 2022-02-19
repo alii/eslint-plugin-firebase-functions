@@ -2,8 +2,15 @@ import {Rule} from 'eslint';
 import {ImportNamespaceSpecifier} from 'estree';
 import {INVALID_FUNCTION_EXPORT} from './errors';
 
+export interface SafeFunctionExportsOptions {
+	importStarName: string;
+}
+
 export const safeFunctionExports: Rule.RuleModule = {
 	create: context => {
+		const {importStarName = 'functions'} = (context.options[0] ||
+			{}) as Partial<SafeFunctionExportsOptions>;
+
 		const hasFirebaseImports = context.getSourceCode().ast.body.some(node => {
 			if (node.type === 'ImportDeclaration') {
 				const namespaces = node.specifiers.filter(
@@ -20,7 +27,7 @@ export const safeFunctionExports: Rule.RuleModule = {
 				return (
 					node.source.type === 'Literal' &&
 					node.source.value === 'firebase-functions' &&
-					namespaces.some(namespace => namespace.local.name === 'functions')
+					namespaces.some(namespace => namespace.local.name === importStarName)
 				);
 			}
 
@@ -42,8 +49,7 @@ export const safeFunctionExports: Rule.RuleModule = {
 							declaration.init.callee.type === 'MemberExpression' &&
 							declaration.init.callee.object.type === 'MemberExpression' &&
 							declaration.init.callee.object.object.type === 'Identifier' &&
-							declaration.init.callee.object.object.name === 'functions' &&
-							declaration.init.callee.object.property.type === 'Identifier'
+							declaration.init.callee.object.object.name === importStarName
 						);
 					});
 
