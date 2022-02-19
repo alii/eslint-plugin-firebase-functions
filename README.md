@@ -8,11 +8,15 @@ An eslint plugin that provides utilty rules for working with firebase functions.
 yarn add eslint-plugin-firebase-functions --dev
 ```
 
-And add the plugin to your `.eslintrc.js`:
+And add the plugin to your `.eslintrc.js` and make sure you enable the rules you want to use:
 
 ```js
 module.exports = {
 	plugins: ['eslint-plugin-firebase-functions'],
+	rules: {
+		// Example enabling a rule
+		'firebase-functions/<rule>': 'error',
+	},
 };
 ```
 
