@@ -12,7 +12,7 @@ And add the plugin to your `.eslintrc.js` and make sure you enable the rules you
 
 ```js
 module.exports = {
-	plugins: ['eslint-plugin-firebase-functions'],
+	plugins: ['firebase-functions'],
 	rules: {
 		// Example enabling a rule
 		'firebase-functions/<rule>': 'error',
@@ -22,4 +22,44 @@ module.exports = {
 
 ### Rules:
 
-- `safe-function-exports`: Ensures that firebase functions defined in a file are exported inline as a named export
+<details>
+<summary>
+`safe-function-exports`: Ensures that firebase functions defined in a file are exported inline as a named export
+</summary>
+
+```ts
+import * as functions from 'firebase-functions';
+
+/////////////////////
+// Incorrect usage //
+/////////////////////
+
+const bad = functions
+	.runWith({timeoutSeconds: 2000})
+	.https.onRequest((req, res) => {
+		//
+	});
+
+const bad2 = functions.https.onRequest((req, res) => {
+	//
+});
+
+// Fails because not inline
+export {bad};
+
+///////////////////
+// Correct usage //
+///////////////////
+
+export const good = functions
+	.runWith({timeoutSeconds: 2000})
+	.https.onRequest((req, res) => {
+		//
+	});
+
+export const good2 = functions.https.onRequest((req, res) => {
+	//
+});
+```
+
+</details>
