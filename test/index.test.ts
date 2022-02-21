@@ -63,6 +63,31 @@ const GOOD_CODE_CASES = [
 			response.send("Hello from Firebase!"); 
 		});
 	`,
+	stripIndent`
+		import * as functions from "firebase-functions";
+
+		export const goodHello = functions.https.onRequest(async (request, response) => {
+			const thing = "a string thing";
+			functions.logger.info(thing, {structuredData: true});
+			response.send("Hello from Firebase!"); 
+		});
+	`,
+	stripIndent`
+		import * as functions from "firebase-functions";
+
+		const necessaryToReproduceBug = Promise.resolve([
+		  {
+		    doSomething(i: number) {
+		      return new Promise((resolve) => setTimeout(() => resolve(i), 0));
+		    },
+		  },
+		] as const);
+
+		export const goodHello = functions.https.onRequest(async (request) => {
+		  const messageId = (await necessaryToReproduceBug)[0].doSomething(1);
+		  console.log('Message published.', messageId);
+		});
+	`,
 ];
 
 const BAD_CODE_CASES = GOOD_CODE_CASES.map(code => code.replace('export ', ''));
