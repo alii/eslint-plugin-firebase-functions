@@ -13,5 +13,9 @@ export function getRootName(object: Expression | Super): string {
 		return object.name;
 	}
 
+	if (object.type === 'AwaitExpression') {
+		return getRootName(object.argument);
+	}
+
 	throw new Error('Root object is not an identifier');
 }

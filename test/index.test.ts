@@ -77,11 +77,11 @@ const GOOD_CODE_CASES = [
 
 		const necessaryToReproduceBug = Promise.resolve([
 		  {
-		    doSomething(i: number) {
+		    doSomething(i) {
 		      return new Promise((resolve) => setTimeout(() => resolve(i), 0));
 		    },
 		  },
-		] as const);
+		]);
 
 		export const goodHello = functions.https.onRequest(async (request) => {
 		  const messageId = (await necessaryToReproduceBug)[0].doSomething(1);
