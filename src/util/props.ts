@@ -5,7 +5,7 @@ export function getRootName(object: Expression | Super): string {
 		return getRootName(object.object);
 	}
 
-	if (object.type === 'CallExpression') {
+	if (object.type === 'CallExpression' || object.type === 'NewExpression') {
 		return getRootName(object.callee);
 	}
 
