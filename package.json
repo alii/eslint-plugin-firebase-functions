@@ -1,6 +1,6 @@
 {
 	"name": "eslint-plugin-firebase-functions",
-	"version": "1.0.13",
+	"version": "1.0.14",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"packageManager": "yarn@3.1.1",
