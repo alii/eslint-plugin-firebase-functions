@@ -88,6 +88,15 @@ const GOOD_CODE_CASES = [
 		  console.log('Message published.', messageId);
 		});
 	`,
+	stripIndent`
+	import * as functions from "firebase-functions";
+
+	export const goodHello = functions.https.onRequest(async (request, response) => {
+		const thing = new RegExp('create using new and immediately access a field').exec(request.path);
+		functions.logger.info(thing, {structuredData: true});
+		response.send("Hello from Firebase!"); 
+	});
+`,
 ];
 
 const BAD_CODE_CASES = GOOD_CODE_CASES.map(code => code.replace('export ', ''));
